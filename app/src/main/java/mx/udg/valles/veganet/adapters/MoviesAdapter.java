@@ -1,6 +1,7 @@
 package mx.udg.valles.veganet.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import mx.udg.valles.veganet.manejourls.Detail;
 import mx.udg.valles.veganet.manejourls.R;
 import mx.udg.valles.veganet.models.Movie;
 
@@ -39,10 +41,19 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         Picasso.with(context).load(movies.get(position).getPoster_path())
                 .into(holder.image);
+
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Detail.class);
+                intent.putExtra("PeliculaSeleccionada", movies.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
