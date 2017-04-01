@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     tools:context="mx.udg.valles.veganet.manejourls.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listaPeliculas"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <fragment
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:name="mx.udg.valles.veganet.fragments.Main"
+        tools:layout="@layout/fragment_main"
+        android:id="@+id/fragmentMain" />
 
 </android.support.constraint.ConstraintLayout>

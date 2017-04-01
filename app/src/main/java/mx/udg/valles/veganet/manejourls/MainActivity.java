@@ -15,35 +15,16 @@ import mx.udg.valles.veganet.listeners.NetworkConnectionInterface;
 import mx.udg.valles.veganet.models.Movie;
 import mx.udg.valles.veganet.network.NetworkConnection;
 
-public class MainActivity extends AppCompatActivity implements NetworkConnectionInterface{
+public class MainActivity extends AppCompatActivity{
 
     private final String TAG = MainActivity.class.getSimpleName();
-    private RecyclerView lista;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lista = (RecyclerView)findViewById(R.id.listaPeliculas);
-        lista.setLayoutManager(new GridLayoutManager(this, 2));
-        lista.setHasFixedSize(true);
-
-        NetworkConnection connection = new NetworkConnection(this, this);
-        connection.execute();
     }
 
-    @Override
-    public void OnSuccesfullyResponse(String response) {
-
-        ArrayList<Movie> peliculas = JsonParser.getMovies(this, response);
-        MoviesAdapter adapter = new MoviesAdapter(this, peliculas);
-        lista.setAdapter(adapter);
-
-    }
-
-    @Override
-    public void OnFailedResponse() {
-
-    }
 }
