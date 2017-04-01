@@ -36,7 +36,7 @@ public class Main extends Fragment implements NetworkConnectionInterface{
         lista.setHasFixedSize(true);
 
         NetworkConnection connection = new NetworkConnection(getContext(), this);
-        connection.execute();
+        connection.execute("popular");
 
         return viewFragment;
     }
