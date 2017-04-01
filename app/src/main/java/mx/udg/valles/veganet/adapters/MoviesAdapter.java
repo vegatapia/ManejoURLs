@@ -24,11 +24,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     private Context context;
     private ArrayList<Movie> movies;
+    private boolean isTablet = false;
 
-    public MoviesAdapter(Context context, ArrayList<Movie> movies){
+    public MoviesAdapter(Context context, ArrayList<Movie> movies, boolean isTablet){
 
         this.movies = movies;
         this.context = context;
+        this.isTablet = isTablet;
     }
 
     @Override
@@ -49,10 +51,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!isTablet){
                 Intent intent = new Intent(context, Detail.class);
                 intent.putExtra("PeliculaSeleccionada", movies.get(position));
                 context.startActivity(intent);
-            }
+            }else{
+
+                }
         });
     }
 

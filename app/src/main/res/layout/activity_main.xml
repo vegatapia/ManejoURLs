@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mx.udg.valles.veganet.manejourls.MainActivity">
+    tools:context="mx.udg.valles.veganet.manejourls.MainActivity"
+    android:tag="tablet"
+    android:id="@+id/ParentMain">
 
     <fragment
         android:layout_width="368dp"

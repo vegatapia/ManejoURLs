@@ -29,37 +29,41 @@ public class Detail extends Fragment {
     private final String TAG = Detail.class.getSimpleName();
     private Movie pelicula;
     private NetworkConnection connection;
+    private boolean isTablet = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pelicula = getActivity().getIntent().getParcelableExtra("PeliculaSeleccionada");
-        connection = new NetworkConnection(getContext(), new NetworkConnectionInterface() {
-            @Override
-            public void OnSuccesfullyResponse(String response) {
-                //TODO: Parsear los datos de esta llamada y mandar a llamar a los reviews
-                connection = new NetworkConnection(getContext(), new NetworkConnectionInterface() {
-                    @Override
-                    public void OnSuccesfullyResponse(String response) {
-                        //TODO: Leer y Parsear datos de la segunda llamada
-                        updateUI();
-                    }
+        isTablet = getActivity().getIntent().getBooleanExtra("tag", false);
+        if(!isTablet) {
+            pelicula = getActivity().getIntent().getParcelableExtra("PeliculaSeleccionada");
+            connection = new NetworkConnection(getContext(), new NetworkConnectionInterface() {
+                @Override
+                public void OnSuccesfullyResponse(String response) {
+                    //TODO: Parsear los datos de esta llamada y mandar a llamar a los reviews
+                    connection = new NetworkConnection(getContext(), new NetworkConnectionInterface() {
+                        @Override
+                        public void OnSuccesfullyResponse(String response) {
+                            //TODO: Leer y Parsear datos de la segunda llamada
+                            updateUI();
+                        }
 
-                    @Override
-                    public void OnFailedResponse() {
+                        @Override
+                        public void OnFailedResponse() {
 
-                    }
-                });
+                        }
+                    });
 
-                connection.execute(getString(R.string.endpoint_reviews, String.valueOf(pelicula.getId())));
-            }
+                    connection.execute(getString(R.string.endpoint_reviews, String.valueOf(pelicula.getId())));
+                }
 
-            @Override
-            public void OnFailedResponse() {
+                @Override
+                public void OnFailedResponse() {
 
-            }
-        });
-        connection.execute(getString(R.string.endpoint_videos, String.valueOf(pelicula.getId())));
+                }
+            });
+            connection.execute(getString(R.string.endpoint_videos, String.valueOf(pelicula.getId())));
+        }
     }
 
     private void updateUI() {

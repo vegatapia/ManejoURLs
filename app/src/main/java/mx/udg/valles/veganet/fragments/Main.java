@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import mx.udg.valles.veganet.adapters.MoviesAdapter;
 import mx.udg.valles.veganet.json_utilities.JsonParser;
 import mx.udg.valles.veganet.listeners.NetworkConnectionInterface;
+import mx.udg.valles.veganet.manejourls.MainActivity;
 import mx.udg.valles.veganet.manejourls.R;
 import mx.udg.valles.veganet.models.Movie;
 import mx.udg.valles.veganet.network.NetworkConnection;
@@ -45,7 +46,7 @@ public class Main extends Fragment implements NetworkConnectionInterface{
     public void OnSuccesfullyResponse(String response) {
 
         ArrayList<Movie> peliculas = JsonParser.getMovies(getContext(), response);
-        MoviesAdapter adapter = new MoviesAdapter(getContext(), peliculas);
+        MoviesAdapter adapter = new MoviesAdapter(getContext(), peliculas, MainActivity.isTablet);
         lista.setAdapter(adapter);
 
     }
